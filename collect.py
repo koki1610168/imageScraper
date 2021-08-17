@@ -2,9 +2,14 @@ from selenium import webdriver
 import time
 import urllib.parse
 import os
-#Initialize selenium with chromedriver
-driver = webdriver.Chrome(executable_path="/Users/kokiyahata/Desktop/imageCollector/chromedriver")
+import requests
+from bs4 import BeautifulSoup
 
+#Initialize selenium with chromedriver
+
+keyword = input("Type in keyword: ")
+num = int(input("How many images do you want?: "))
+driver = webdriver.Chrome(executable_path="/Users/kokiyahata/Desktop/imageCollector/chromedriver")
 def searchImage(keyword, num):
     os.mkdir("/Users/kokiyahata/Desktop/imageCollector/images/" + keyword) 
     driver.get("https://www.google.com/imghp?hl=EN")
@@ -18,5 +23,7 @@ def searchImage(keyword, num):
             driver.find_element_by_xpath('//*[@id="islrg"]/div[1]/div['+str(i)+']/a[1]/div[1]/img').screenshot("/Users/kokiyahata/Desktop/imageCollector/images/" + keyword + "/" + keyword + str(i) + ".png")
         except:
             pass
+    driver.quit()
+searchImage(keyword, num)
 
-searchImage("Tokyo Tower", 100)
+
